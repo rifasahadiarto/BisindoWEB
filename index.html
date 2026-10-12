@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BISINDO KIDS: Edukasi & Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./style.css">
+
+    <script type="importmap">
+        { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }
+    </script>
+</head>
+<body>
+
+    <div id="home-screen">
+        <div class="logo-container"><i class="fas fa-hands-asl-interpreting logo-icon"></i></div>
+        <h1 class="title-main">BISINDO KIDS</h1>
+        <p class="subtitle">Belajar Bahasa Isyarat Seru!</p>
+        
+        <div class="btn-group">
+            <button class="btn-start" onclick="if (typeof window.startApp === 'function') window.startApp(); else alert('Aplikasi belum termuat. Jalankan lewat HTTPS/localhost dan periksa koneksi internet.');">MULAI BELAJAR ▶</button>
+            <button class="btn-info" onclick="showInfo()">INFO & PANDUAN ℹ️</button>
+        </div>
+    </div>
+
+    <div id="info-modal">
+        <div class="info-card">
+            <div class="info-title">Apa itu BISINDO?</div>
+            <div class="info-text">
+                <b>BISINDO</b> (Bahasa Isyarat Indonesia) adalah bahasa isyarat alami budaya Tuli Indonesia. Aplikasi ini membantu kamu belajar huruf vokal dasar.
+            </div>
+            
+            <div style="border-top: 2px dashed #ddd; margin: 10px 0;"></div>
+            
+            <div class="info-title" style="font-size: 20px;">Panduan Isyarat</div>
+            <div class="cheat-sheet">
+                <div class="cheat-item">
+                    <div class="cheat-letter">A</div>
+                    <div class="cheat-desc">Kepalan Tangan</div>
+                </div>
+                <div class="cheat-item">
+                    <div class="cheat-letter">I</div>
+                    <div class="cheat-desc">Kelingking Lurus</div>
+                </div>
+                <div class="cheat-item">
+                    <div class="cheat-letter">U</div>
+                    <div class="cheat-desc">Telunjuk Lurus</div>
+                </div>
+                <div class="cheat-item">
+                    <div class="cheat-letter">E</div>
+                    <div class="cheat-desc">3 Jari Lurus</div>
+                </div>
+                <div class="cheat-item">
+                    <div class="cheat-letter">O</div>
+                    <div class="cheat-desc">Jari Bulat</div>
+                </div>
+            </div>
+
+            <div style="font-size: 12px; color:#888; margin-top:10px;">
+                💡 <b>Tips:</b> Pastikan cahaya terang dan tangan terlihat jelas di kamera.
+            </div>
+
+            <button class="btn-close" onclick="closeInfo()">TUTUP</button>
+        </div>
+    </div>
+
+    <div id="ar-screen">
+        <div id="camera-frame">
+            <div class="back-btn" onclick="backToHome()"><i class="fas fa-home"></i></div>
+
+            <div class="word-box-container">
+                <div class="word-box" id="word-display">_</div>
+                <div class="word-actions">
+                    <button class="action-btn" onclick="clearWord()"><i class="fas fa-trash"></i> Hapus</button>
+                    <button class="action-btn" onclick="speakWord()"><i class="fas fa-volume-up"></i> Baca</button>
+                </div>
+            </div>
+
+            <div id="loading-overlay">
+                <i class="fas fa-spinner fa-spin" style="font-size: 40px; margin-bottom: 15px;"></i>
+                <div id="loading-message" aria-live="polite">Menyiapkan AI...</div>
+                <button id="retry-button" class="btn-close" onclick="startApp()" style="display:none;">COBA LAGI</button>
+            </div>
+
+            <div class="result-bubble" id="res-bubble">
+                <div class="result-text" id="big-char">?</div>
+            </div>
+
+            <video id="webcam" autoplay playsinline></video>
+            <canvas id="debug_canvas"></canvas> 
+            <canvas id="output_canvas"></canvas>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
